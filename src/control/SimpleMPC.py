@@ -37,7 +37,8 @@ class MPC(nn.Module):
                  action_dim: int,
                  H: int,  # receding horizon
                  action_min: float = -1.0,
-                 action_max: float = 1.0):
+                 action_max: float = 1.0,
+                 gamma: float = 1.0):
         super(MPC, self).__init__()
 
         self.model = model
@@ -47,6 +48,7 @@ class MPC(nn.Module):
         self.H = H
         self.action_min = action_min
         self.action_max = action_max
+        self.gamma = gamma
 
     def solve(self, x0, target, max_iter: int, tol=1e-5):
         crit = torch.nn.MSELoss()
